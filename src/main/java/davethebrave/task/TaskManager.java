@@ -30,79 +30,79 @@ public class TaskManager {
         System.out.println("Previous tasks loaded: ");
         listTasks();
     }
-    public void addTask(String type, String task, String details) {
+    public String addTask(String type, String task, String details) {
         if (type.equals(deadlineType) && details != null) {
             try {
                 LocalDate.parse(details.trim(), Task.INPUT_FORMATTER);
-                System.out.println("Added deadline: " + task + " (by: " + details + ")");
+                tasks.add(new Task(type, task, details));
+                storage.saveTasksToFile(tasks);
+                return "Added deadline: " + task + " (by: " + details + ")";
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date format! Please use yyyy-MM-dd (e.g., 2019-10-15).");
-                return;
+                return "Invalid date format! Please use yyyy-MM-dd (e.g., 2019-10-15).";
             }
         }
         tasks.add(new Task(type, task, details));
         storage.saveTasksToFile(tasks);
-        ui.showTaskAdded(tasks);
+        return ui.showTaskAdded(tasks);
     }
 
-    public void deleteTask(int taskNumber) {
+    public String deleteTask(int taskNumber) {
         if (isValidTaskNumber(taskNumber)) {
             Task removedTask = tasks.remove(taskNumber - 1);
             storage.saveTasksToFile(tasks);
-            ui.showTaskDeleted(removedTask, tasks);
+            return ui.showTaskDeleted(removedTask, tasks);
         }
+        return "Invalid Task Number.";
     }
 
-    public void listTasks() {
-        System.out.println("    ____________________________________________________________");
+    public String listTasks() {
+        String output = "";
         if (tasks.isEmpty()) {
-            System.out.println("      No tasks to display.");
+            return "No tasks to display.";
         } else {
-            System.out.println("      Here are the tasks in your list:");
+            output += "Here are the tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("      " + (i + 1) + "." + tasks.get(i));
+                output += "      " + (i + 1) + "." + tasks.get(i) + "\n";
             }
+            return output;
         }
-        System.out.println("    ____________________________________________________________");
     }
 
-    public void markTask(int taskNumber) {
+    public String markTask(int taskNumber) {
+        String output = "";
         if (isValidTaskNumber(taskNumber)) {
             Task task = tasks.get(taskNumber - 1);
             if (!task.toString().contains("[X]")) {
                 task.mark();
                 storage.saveTasksToFile(tasks);
-                System.out.println("    ____________________________________________________________");
-                System.out.println("      Nice! I've marked this task as done:");
+                output += "Nice! I've marked this task as done:\n";
             } else {
-                System.out.println("    ____________________________________________________________");
-                System.out.println("      This task is already marked as done:");
+                output += "This task is already marked as done:\n";
             }
-            System.out.println("         " + task);
-            System.out.println("    ____________________________________________________________");
+            return output + task;
         }
+        return "Invalid Task Number.";
     }
 
-    public void unmarkTask(int taskNumber) {
+    public String unmarkTask(int taskNumber) {
+        String output = "";
         if (isValidTaskNumber(taskNumber)) {
             Task task = tasks.get(taskNumber - 1);
             if (task.toString().contains("[X]")) {
                 task.unmark();
                 storage.saveTasksToFile(tasks);
-                System.out.println("    ____________________________________________________________");
-                System.out.println("      OK, I've marked this task as not done yet:");
+                output += "OK, I've marked this task as not done yet:\n";
             } else {
-                System.out.println("    ____________________________________________________________");
-                System.out.println("      This task is already marked as not done:");
+                output += "This task is already marked as not done:\n";
             }
-            System.out.println("         " + task);
-            System.out.println("    ____________________________________________________________");
+            return output + task;
         }
+        return "Invalid Task Number.";
     }
 
-    public void findTask(String keyword) {
-        System.out.println("    ____________________________________________________________");
+    public String findTask(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
+        String output = "";
 
         for (int i = 0; i < tasks.size(); i++) {
             String taskDesc = tasks.get(i).getTaskDescription().toLowerCase();
@@ -112,23 +112,17 @@ public class TaskManager {
         }
 
         if (matchingTasks.isEmpty()) {
-            System.out.println("      No matching tasks found.");
+            output += "No matching tasks found.";
         } else {
-            System.out.println("      Matching tasks found:");
+            output += "Matching tasks found:\n";
             for (int i = 0; i < matchingTasks.size(); i++) {
-                System.out.println("      " + (i + 1) + "." + matchingTasks.get(i));
+                output += "      " + (i + 1) + "." + matchingTasks.get(i) + "\n";
             }
         }
-        System.out.println("    ____________________________________________________________");
+        return output;
     }
 
     private boolean isValidTaskNumber(int taskNumber) {
-        if (taskNumber < 1 || taskNumber > tasks.size()) {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("      Invalid task number.");
-            System.out.println("    ____________________________________________________________");
-            return false;
-        }
-        return true;
+        return !(taskNumber < 1 || taskNumber > tasks.size());
     }
 }
