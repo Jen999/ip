@@ -46,9 +46,9 @@ public class TaskManager {
         return ui.showTaskAdded(tasks);
     }
 
-    public String deleteTask(int taskNumber) {
+    public String deleteTask(String taskNumber) {
         if (isValidTaskNumber(taskNumber)) {
-            Task removedTask = tasks.remove(taskNumber - 1);
+            Task removedTask = tasks.remove(Integer.parseInt(taskNumber) - 1);
             storage.saveTasksToFile(tasks);
             return ui.showTaskDeleted(removedTask, tasks);
         }
@@ -68,10 +68,10 @@ public class TaskManager {
         }
     }
 
-    public String markTask(int taskNumber) {
+    public String markTask(String taskNumber) {
         String output = "";
         if (isValidTaskNumber(taskNumber)) {
-            Task task = tasks.get(taskNumber - 1);
+            Task task = tasks.get(Integer.parseInt(taskNumber) - 1);
             if (!task.toString().contains("[X]")) {
                 task.mark();
                 storage.saveTasksToFile(tasks);
@@ -84,10 +84,10 @@ public class TaskManager {
         return "Invalid Task Number.";
     }
 
-    public String unmarkTask(int taskNumber) {
+    public String unmarkTask(String taskNumber) {
         String output = "";
         if (isValidTaskNumber(taskNumber)) {
-            Task task = tasks.get(taskNumber - 1);
+            Task task = tasks.get(Integer.parseInt(taskNumber) - 1);
             if (task.toString().contains("[X]")) {
                 task.unmark();
                 storage.saveTasksToFile(tasks);
@@ -122,7 +122,12 @@ public class TaskManager {
         return output;
     }
 
-    private boolean isValidTaskNumber(int taskNumber) {
-        return !(taskNumber < 1 || taskNumber > tasks.size());
+    private boolean isValidTaskNumber(String taskNumber) {
+        try {
+            int num = Integer.parseInt(taskNumber);
+            return num >= 1 && num <= tasks.size();
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

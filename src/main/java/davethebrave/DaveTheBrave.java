@@ -4,6 +4,7 @@ Handles the main logic of running the program and scanning user input
 
 package davethebrave;
 
+import davethebrave.command.Command;
 import davethebrave.ui.Ui;
 import davethebrave.task.TaskManager;
 import davethebrave.storage.Storage;
@@ -17,6 +18,7 @@ public class DaveTheBrave {
     private Storage storage;
     private TaskManager taskManager;
     private Ui ui;
+    private String commandType;
 
     public DaveTheBrave(String filePath) {
         ui = new Ui();
@@ -32,12 +34,11 @@ public class DaveTheBrave {
         List<String> greetings = Arrays.asList("hello", "hi", "hey", "yo");
         List<String> goodbyes = Arrays.asList("bye", "goodbye");
 
-        ui.showWelcome();
-
         /*
         Exit when user types the command 'bye'
          */
         if (goodbyes.contains(input.toLowerCase())) {
+            commandType = "GoodbyeCommand";
             return ui.showGoodbye();
         }
 
@@ -45,6 +46,7 @@ public class DaveTheBrave {
         Additional greetings
          */
         if (greetings.contains(input.toLowerCase())) {
+            commandType = "GreetingCommand";
             return ui.respondHello();
         }
 
@@ -52,9 +54,19 @@ public class DaveTheBrave {
         Cheer
          */
         if (input.equalsIgnoreCase("cheer")) {
+            commandType = "CheerCommand";
             return ui.showCheer();
         }
+        try {
+            Command c = Parser.parseCommand(input, taskManager);
+            commandType = c.getClass().getSimpleName(); // Store the command type
+            return c.execute();
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
+        }
+    }
 
-        return Parser.parseCommand(input, taskManager);
+    public String getCommandType() {
+        return commandType;
     }
 }

@@ -39,15 +39,54 @@ public class DialogBox extends HBox {
         FXCollections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.getStyleClass().add("reply-label");
     }
+
+    private void changeDialogStyle(String commandType) {
+        if (commandType == null) {
+            commandType = "UnknownCommand";
+        }
+
+        switch (commandType) {
+            case "AddCommand":
+                dialog.getStyleClass().add("add-label");
+                break;
+            case "ChangeMarkCommand":
+                dialog.getStyleClass().add("marked-label");
+                break;
+            case "DeleteCommand":
+                dialog.getStyleClass().add("delete-label");
+                break;
+            case "FindCommand":
+                dialog.getStyleClass().add("find-label");
+                break;
+            case "InvalidCommand":
+                dialog.getStyleClass().add("error-label");
+                break;
+            case "GreetingCommand":
+                dialog.getStyleClass().add("greeting-label");
+                break;
+            case "CheerCommand":
+                dialog.getStyleClass().add("cheer-label");
+                break;
+            case "GoodbyeCommand":
+                dialog.getStyleClass().add("goodbye-label");
+                break;
+            default:
+                dialog.getStyleClass().add("default-label");
+        }
+    }
+
+
 
     public static DialogBox getUserDialog(String s, Image i) {
         return new DialogBox(s, i);
     }
 
-    public static DialogBox getDaveDialog(String s, Image i) {
+    public static DialogBox getDaveDialog(String s, Image i, String commandType) {
         var db = new DialogBox(s, i);
         db.flip();
+        db.changeDialogStyle(commandType);
         return db;
     }
 }
