@@ -4,32 +4,26 @@ Parses user commands into TaskManager operations to execute and generate output
 
 package davethebrave.parser;
 
+import davethebrave.command.*;
 import davethebrave.task.TaskManager;
 
 public class Parser {
-    public static String parseCommand(String command, TaskManager taskManager) {
+    public static Command parseCommand(String command, TaskManager taskManager) {
         /*
         Display list when requested
          */
         if (command.equalsIgnoreCase("list")) {
-            return taskManager.listTasks();
+            return new ListCommand(taskManager);
         }
         else if (command.toLowerCase().startsWith("find ")) {
             String keyword = command.substring(5).trim();
-            if (!keyword.isEmpty()) {
-                return taskManager.findTask(keyword);
-            } else {
-                return "Invalid format. Use: find <keyword>";
-            }
+            return keyword.isEmpty() ? new InvalidCommand("Invalid format. Use: find <keyword>") : new FindCommand(taskManager, keyword);
         }
+
         // Add To-Do tasks
         else if (command.toLowerCase().startsWith("todo ")) {
             String todoInfo = command.substring(5).trim();
-            if (!todoInfo.isEmpty()) {
-                return taskManager.addTask("T", todoInfo, null);
-            } else {
-                return "Invalid format. Use: todo <task>";
-            }
+            return new AddCommand(taskManager, "T", todoInfo);
         }
         /*
         Add Deadline tasks
@@ -37,11 +31,9 @@ public class Parser {
         else if (command.toLowerCase().startsWith("deadline ")) {
             String[] deadlineInfo = command.substring(9).split(" /by", 2);
             if (deadlineInfo.length == 2) {
-                String task = deadlineInfo[0].trim();
-                String deadline = deadlineInfo[1].trim();
-                return taskManager.addTask("D", task, deadline);
+                return new AddCommand(taskManager, "D", deadlineInfo[0].trim(), deadlineInfo[1].trim());
             } else {
-                return "Invalid format. Use: deadline <task> /by yyyy-MM-dd";
+                return new InvalidCommand("Invalid format. Use: deadline <task> /by yyyy-MM-dd");
             }
         }
         /*
@@ -50,49 +42,37 @@ public class Parser {
         else if (command.toLowerCase().startsWith("event ")) {
             String[] eventInfo = command.substring(6).split(" /start | /end ", 3);
             if (eventInfo.length == 3) {
-                String task = eventInfo[0].trim();
-                String start = eventInfo[1].trim();
-                String end = eventInfo[2].trim();
-                return taskManager.addTask("E", task, "(start: " + start + ", end: " + end + ")");
+                return new AddCommand(taskManager, "E", eventInfo[0].trim(), "(start: " + eventInfo[1].trim() + ", end: " + eventInfo[2].trim() + ")");
             } else {
-                return "Invalid format. Use: event <task> /start <start date/time> /end <end date/time>";
+                return new InvalidCommand("Invalid format. Use: event <task> /start <start date/time> /end <end date/time>");
             }
         }
         /*
         Delete tasks
          */
         else if (command.toLowerCase().startsWith("delete ")) {
-            if (command.substring(7).trim().isEmpty()) {
-                return "Task Number cannot be empty.";
-            }
-            int taskNumber = Integer.parseInt(command.substring(7).trim());
-            return taskManager.deleteTask(taskNumber);
+            String taskNumber = command.substring(7).trim();
+            return new DeleteCommand(taskManager, taskNumber);
         }
         /*
         Mark tasks as done
          */
         else if (command.toLowerCase().startsWith("mark ")) {
-            if (command.substring(5).trim().isEmpty()) {
-                return "Task Number cannot be empty.";
-            }
-            int taskNumber = Integer.parseInt(command.substring(5).trim());
-            return taskManager.markTask(taskNumber);
+            String taskNumber = command.substring(5).trim();
+            return new ChangeMarkCommand(taskManager, taskNumber, true);
         }
         /*
         Unmark tasks as not done
          */
         else if (command.toLowerCase().startsWith("unmark ")) {
-            if (command.substring(7).trim().isEmpty()) {
-                return "Task Number cannot be empty.";
-            }
-            int taskNumber = Integer.parseInt(command.substring(7).trim());
-            return taskManager.unmarkTask(taskNumber);
+            String taskNumber = command.substring(7).trim();
+            return new ChangeMarkCommand(taskManager, taskNumber, false);
         }
         /*
         Handle Invalid Commands
          */
         else {
-            return
+            return new InvalidCommand(
             "--Invalid Command--\n" +
             "Add to list\n" +
             "      'todo':         todo <task>\n" +
@@ -106,7 +86,7 @@ public class Parser {
             "Delete task from list\n" +
             "      'delete':       delete <task number>\n" +
             "Find task from list\n" +
-            "      'find':       find <keyword>\n";
+            "      'find':       find <keyword>\n");
         }
     }
 }

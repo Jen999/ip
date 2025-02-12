@@ -50,7 +50,7 @@ public class TodoTest {
      */
     @Test
     public void deleteTaskTest() {
-        taskManager.deleteTask(1);
+        taskManager.deleteTask("1");
         assertTrue(taskList.isEmpty(), "Task should be deleted from list.");
     }
 
@@ -61,10 +61,10 @@ public class TodoTest {
     public void markUnmarkTaskTest() {
         taskManager.addTask("T", "Read a book", null);
 
-        taskManager.markTask(1);
+        taskManager.markTask("1");
         assertTrue(taskList.get(0).toString().contains("[X]"), "Task should be marked as done.");
 
-        taskManager.unmarkTask(1);
+        taskManager.unmarkTask("1");
         assertFalse(taskList.get(0).toString().contains("[X]"), "Task should be unmarked and set to not done.");
     }
 
@@ -74,10 +74,10 @@ public class TodoTest {
     @Test
     public void invalidMarkUnmarkTest() {
         int initialSize = taskList.size();
-        taskManager.markTask(999);
+        taskManager.markTask("999");
         assertEquals(initialSize, taskList.size(), "Invalid task marking should not change task list.");
 
-        taskManager.unmarkTask(999);
+        taskManager.unmarkTask("999");
         assertEquals(initialSize, taskList.size(), "Invalid task marking should not change task list.");
     }
 }
