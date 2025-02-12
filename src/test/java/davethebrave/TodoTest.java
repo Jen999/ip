@@ -2,8 +2,6 @@ package davethebrave;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +10,8 @@ import davethebrave.task.TaskManager;
 import davethebrave.task.Task;
 import davethebrave.storage.Storage;
 import davethebrave.ui.Ui;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TodoTest {
     private TaskManager taskManager;
@@ -42,7 +42,7 @@ public class TodoTest {
     @Test
     public void addTaskTest() {
         taskManager.addTask("T", "Complete Assignment", null);
-        assertEquals(1, taskList.size());
+        assertEquals(1, taskList.size(), "Task should be added into list.");
     }
 
     /*
@@ -51,6 +51,33 @@ public class TodoTest {
     @Test
     public void deleteTaskTest() {
         taskManager.deleteTask(1);
-        assertTrue(taskList.isEmpty());
+        assertTrue(taskList.isEmpty(), "Task should be deleted from list.");
+    }
+
+    /*
+    Test mark/unmark task
+     */
+    @Test
+    public void markUnmarkTaskTest() {
+        taskManager.addTask("T", "Read a book", null);
+
+        taskManager.markTask(1);
+        assertTrue(taskList.get(0).toString().contains("[X]"), "Task should be marked as done.");
+
+        taskManager.unmarkTask(1);
+        assertFalse(taskList.get(0).toString().contains("[X]"), "Task should be unmarked and set to not done.");
+    }
+
+    /*
+    Test invalid task number (mark/unmark)
+     */
+    @Test
+    public void invalidMarkUnmarkTest() {
+        int initialSize = taskList.size();
+        taskManager.markTask(999);
+        assertEquals(initialSize, taskList.size(), "Invalid task marking should not change task list.");
+
+        taskManager.unmarkTask(999);
+        assertEquals(initialSize, taskList.size(), "Invalid task marking should not change task list.");
     }
 }
