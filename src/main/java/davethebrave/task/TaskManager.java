@@ -125,6 +125,10 @@ public class TaskManager {
     private boolean isValidTaskNumber(String taskNumber) {
         try {
             int num = Integer.parseInt(taskNumber);
+            /*
+            Ensure task number is valid
+             */
+            assert num >= 1 && num <= tasks.size() : "Task number is out of bounds.";
             return num >= 1 && num <= tasks.size();
         } catch (NumberFormatException e) {
             return false;
