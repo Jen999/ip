@@ -38,6 +38,10 @@ public class Storage {
         try (Scanner scanner = new Scanner(new File(filePath))){
             while (scanner.hasNextLine()) {
                 Task task = Task.fromFileFormat(scanner.nextLine());
+                /*
+                Ensure no null tasks are loaded
+                 */
+                assert task != null : "Loaded task is null";
                 if (task != null) {
                     tasks.add(task);
                 }
