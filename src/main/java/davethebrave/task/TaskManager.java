@@ -17,9 +17,7 @@ public class TaskManager {
     private Storage storage;
     private Ui ui;
 
-    String todoType = "T";
     String deadlineType = "D";
-    String eventType = "E";
 
     public TaskManager(List<Task> tasks, Storage storage, Ui ui) {
         this.tasks = tasks;
