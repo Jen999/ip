@@ -1,44 +1,63 @@
-# Duke project template
+# DaveTheBrave
+> Based on the Duke Project 
+> "Embrace technological advancement, don't fear it." - Dave, the brave 🦸🏻‍♂️
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Your personal companion to ensure you never have to worry about forgetting a task ever again.
 
-## Setting up in IntelliJ
+The Main class is located in the `src/main/java/davethebrave/DaveTheBrave` file in the original repository [here](https://github.com/Jen999/ip). 
 
-Prerequisites: JDK 21.
+## Functionalities
+**✔️ Manage your own list**
+1.  Add tasksFind tasks
+2. Delete tasks
+3. List all tasks
+4. Find tasks
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into IntelliJ as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 21** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+**✔️ Variety of task types**
+1. To-Do tasks
+2. Deadline tasks with end date (deadline)
+3. Event tasks with start and end date
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+**✔️ Marking feature**
+1. Mark tasks as done
+2. Unmark tasks as undone
 
-## Running Tests
+## Component Details
+#### Task Manager: 
+- Handles all methods related to the list of tasks.
+#### Task
+- Handles all methods related to each individual task.
+#### Parser
+- Parses user commands into Task Manager operations to execute and generate output.
+#### Storage
+- Handles the storing and loading of the list of task from local file.
+#### UI
+- Handles the formatting of basic display messages to be called by Task Manager and Main classes.
 
-The project comes with a set of test scripts for different operating systems:
+## Feature Updates
+- [x] Basic management of tasks
+- [x] Add "find/search" feature
+- [ ] Enhancing UI
+- [ ] Add "categorizing/filtering" feature
 
-- **MacOS/Linux**: Run the shell script
-  ```bash
-  cd text-ui-test
-  ./runtest.sh
-  ```
+## Starting out with DaveTheBrave
+After you've had your introductions ("hi", "hey", "hello", "yo"), you can start adding tasks with:
+```
+// Add a To-Do task
+todo Buy groceries
 
-- **Windows**: Run the batch script
-  ```batch
-  cd text-ui-test
-  runtest.bat
-  ```
+// Add a Deadline task
+deadline Complete CS2103DE iP Week 5 Tasks /by 2025-02-14
 
-These scripts will compile the source files, run the tests, and compare the output against the expected output.
+// View your personal list
+list
+
+// Mark a task by its task number once you've completed it
+mark 1
+
+// Find your task
+find CS2103DE
+
+// Call it a day
+bye
+```
