@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.Comparator;
 
 public class TaskManager {
     private List<Task> tasks;
@@ -116,6 +118,29 @@ public class TaskManager {
             for (int i = 0; i < matchingTasks.size(); i++) {
                 output += "      " + (i + 1) + "." + matchingTasks.get(i) + "\n";
             }
+        }
+        return output;
+    }
+
+    /*
+    Show all deadline tasks in chronological order
+     */
+    public String showDeadlines() {
+        String output = "";
+        List<Task> deadlineTasks = tasks.stream()
+                .filter(task -> task.getType().equals(deadlineType))
+                .sorted(Comparator.comparing(Task::getDate))
+                .toList();
+
+        if (deadlineTasks.isEmpty()) {
+            output += "No deadline tasks found.";
+        }
+
+        output += "Here are your deadline tasks in chronological order:\n";
+
+        for (int i = 0; i < deadlineTasks.size(); i++) {
+            Task task = deadlineTasks.get(i);
+            output += "      " + (i + 1) + "." + task.toString() + "\n";
         }
         return output;
     }
