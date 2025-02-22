@@ -41,6 +41,14 @@ public class Task {
         }
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public LocalDate getDate() {
+        return deadline != null ? deadline : LocalDate.MAX;
+    }
+
     public String getTaskDescription() {
         return this.description;
     }
