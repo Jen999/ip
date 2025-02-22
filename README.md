@@ -1,5 +1,5 @@
 # DaveTheBrave
-> Based on the Duke Project 
+With reference to the the Duke Project se-edu/duke
 > "Embrace technological advancement, don't fear it." - Dave, the brave 🦸🏻‍♂️
 
 Your personal companion to ensure you never have to worry about forgetting a task ever again.
