@@ -4,6 +4,18 @@ With reference to the the Duke Project se-edu/duke
 
 Your personal companion to ensure you never have to worry about forgetting a task ever again.
 
+## Setting up in IntelliJ
+
+Prerequisites: JDK 21.
+
+1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
+1. Open the project into IntelliJ as follows:
+   1. Click `Open`.
+   1. Select the project directory, and click `OK`.
+   1. If there are any further prompts, accept the defaults.
+1. Configure the project to use **JDK 21** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
+   In the same dialog, set the **Project language level** field to the `SDK default` option.
+
 The Main class is located in the `src/main/java/davethebrave/DaveTheBrave` file in the original repository [here](https://github.com/Jen999/ip). 
 
 ## Functionalities
