@@ -28,9 +28,8 @@ public class Task {
         this.details = details;
 
         /*
-        Task types
+        Handling specific task types (i.e., deadline tasks)
          */
-
         if (type.equals(deadlineType) && details != null) {
             try {
                 this.deadline = LocalDate.parse(details.trim(), INPUT_FORMATTER);
@@ -73,14 +72,14 @@ public class Task {
     }
 
     /*
-    Writing to file
+    Formatting task to write to data file
      */
     public String toFileFormat() {
         return type + " | " + (status ? "[X]" : "[ ]") + " | " + description + (details != null ? " | " + details : "");
     }
 
     /*
-    Loading from file
+    Loading tasks from data file
      */
     public static Task fromFileFormat(String line) {
         String[] info = line.split("\\s*\\|\\s*");
