@@ -1,12 +1,11 @@
-/*
-Parses user commands into TaskManager operations to execute and generate output
- */
-
 package davethebrave.parser;
 
 import davethebrave.command.*;
 import davethebrave.task.TaskManager;
 
+/**
+ * Parses user commands into TaskManager operations to execute and generate output
+ */
 public class Parser {
     public static Command parseCommand(String command, TaskManager taskManager) {
         /*

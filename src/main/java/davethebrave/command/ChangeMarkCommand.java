@@ -2,6 +2,9 @@ package davethebrave.command;
 
 import davethebrave.task.TaskManager;
 
+/**
+ * Base command for toggling task marker
+ */
 public class ChangeMarkCommand implements Command {
     private TaskManager taskManager;
     private String taskNumber;

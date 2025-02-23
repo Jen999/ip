@@ -2,6 +2,9 @@ package davethebrave.command;
 
 import davethebrave.task.TaskManager;
 
+/**
+ * Base command for displaying deadline tasks chronologically
+ */
 public class ShowDeadlinesCommand implements Command {
     private TaskManager taskManager;
 

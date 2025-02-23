@@ -1,13 +1,12 @@
-/*
-Handles methods related to each individual task
- */
-
 package davethebrave.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles methods related to each individual task
+ */
 public class Task {
     private String type; // "T" = To-Do, "D" = Deadline, "E" = Event
     private String description;

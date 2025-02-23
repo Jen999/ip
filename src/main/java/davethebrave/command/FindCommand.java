@@ -2,6 +2,10 @@ package davethebrave.command;
 
 import davethebrave.task.TaskManager;
 
+
+/**
+ * Base command for finding tasks based on keyword
+ */
 public class FindCommand implements Command {
     private TaskManager taskManager;
     private String keyword;

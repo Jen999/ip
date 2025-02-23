@@ -1,7 +1,3 @@
-/*
-Handles the main logic of running the program and scanning user input
- */
-
 package davethebrave;
 
 import davethebrave.command.Command;
@@ -11,9 +7,11 @@ import davethebrave.storage.Storage;
 import davethebrave.parser.Parser;
 
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.List;
 
+/**
+ * Handles the main logic of running the program and scanning user input
+ */
 public class DaveTheBrave {
     private Storage storage;
     private TaskManager taskManager;

@@ -1,7 +1,3 @@
-/*
-Handles methods related to the list of tasks
- */
-
 package davethebrave.task;
 
 import davethebrave.storage.Storage;
@@ -11,9 +7,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 import java.util.Comparator;
 
+/**
+ * Handles methods related to the list of tasks
+ */
 public class TaskManager {
     private List<Task> tasks;
     private Storage storage;

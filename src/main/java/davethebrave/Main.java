@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main function for handling application
+ */
 public class Main extends Application {
     private DaveTheBrave dave = new DaveTheBrave("data/davethebrave.txt");
 
