@@ -24,7 +24,7 @@ public class Main extends Application {
             stage.setMinHeight(220);
             stage.setMinWidth(417);
 
-            fxmlLoader.<MainWindow>getController().setDave(dave);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setDave(dave);  // inject the Dave instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

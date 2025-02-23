@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private DaveTheBrave dave;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dave.jpg"));
+    private Image daveImage = new Image(this.getClass().getResourceAsStream("/images/dave.jpg"));
 
     @FXML
     public void initialize() {
@@ -48,7 +48,7 @@ public class MainWindow extends AnchorPane {
         String commandType = dave.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDaveDialog(response, dukeImage, commandType)
+                DialogBox.getDaveDialog(response, daveImage, commandType)
         );
         userInput.clear();
     }
