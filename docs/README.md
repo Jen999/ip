@@ -3,6 +3,18 @@
 DaveTheBrave is a **desktop chatbot** for managing your tasks amidst your busy schedule, 
 functioning as your very own personal assistant keeping track of all of your tasks anytime and anywhere.
 
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [View your tasks : `list`](#view-your-tasks--list)
+  - [Adding tasks : `todo / deadline / event`](#adding-tasks--todo--deadline--event)
+  - [Deleting tasks : `delete`](#deleting-tasks--delete)
+  - [Marking tasks as done : `mark`](#marking-tasks-as-done--mark)
+  - [Unmarking tasks as not done : `unmark`](#unmarking-tasks-as-not-done--unmark)
+  - [Find tasks by keyword : `find`](#find-tasks-by-keyword--find)
+  - [Display deadline tasks chronologically : `show deadline`](#find-tasks-by-keyword--find)
+  - [Any other commands](#any-other-commands)
+- [FAQ](#faq)
+
 ## Quick Start
 1. Ensure you have Java `17` or above installed in your Computer.
 2. Download the latest .jar file from the [repository releases](https://github.com/Jen999/ip/releases).
@@ -60,5 +72,10 @@ View all your urgent deadline tasks in chronological order.
 `show deadline`
 
 ### Any other commands
-If you forget the commands to communicate with DaveTheBrave, fret not!
+If you forget the commands to communicate with DaveTheBrave, fret not!\
 Any other commands that are not listed above will trigger a usage display of the usable commands.
+
+## FAQ
+Q: How do I transfer my task list to another device?\
+A: Install the application in the other device and transfer or replace the data file `data/davethebrave.txt` 
+with that of your DaveTheBrave in your previous device.
