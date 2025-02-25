@@ -26,6 +26,7 @@ application {
 shadowJar {
     archiveBaseName = "davethebrave"
     archiveClassifier = null
+    archiveFileName = 'davethebrave.jar'
 }
 
 java {

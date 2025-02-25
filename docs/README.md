@@ -55,7 +55,10 @@ Search for any tasks with a keyword.
 find exam
 `
 
-### Display deadline tasks chronologically
+### Display deadline tasks chronologically : `show deadline`
 View all your urgent deadline tasks in chronological order.
 `show deadline`
 
+### Any other commands
+If you forget the commands to communicate with DaveTheBrave, fret not!
+Any other commands that are not listed above will trigger a usage display of the usable commands.
