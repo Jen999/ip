@@ -76,6 +76,6 @@ If you forget the commands to communicate with DaveTheBrave, fret not!\
 Any other commands that are not listed above will trigger a usage display of the usable commands.
 
 ## FAQ
-Q: How do I transfer my task list to another device?\
-A: Install the application in the other device and transfer or replace the data file `data/davethebrave.txt` 
+**Q:** How do I transfer my task list to another device?\
+**A:** Install the application in the other device and transfer or replace the data file `data/davethebrave.txt` 
 with that of your DaveTheBrave in your previous device.
