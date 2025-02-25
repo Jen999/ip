@@ -48,15 +48,6 @@ public class TodoTest {
     }
 
     /*
-    Test deleting task
-     */
-    @Test
-    public void deleteTaskTest() {
-        taskManager.deleteTask("1");
-        assertTrue(taskList.isEmpty(), "Task should be deleted from list.");
-    }
-
-    /*
     Test mark/unmark task
      */
     @Test
@@ -81,5 +72,14 @@ public class TodoTest {
 
         taskManager.unmarkTask("999");
         assertEquals(initialSize, taskList.size(), "Invalid task marking should not change task list.");
+    }
+
+    /*
+    Test deleting task
+     */
+    @Test
+    public void deleteTaskTest() {
+        taskManager.deleteTask("1");
+        assertTrue(taskList.isEmpty(), "Task should be deleted from list.");
     }
 }
