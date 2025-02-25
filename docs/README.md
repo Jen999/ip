@@ -1,65 +1,61 @@
 # DaveTheBrave User Guide
 
-## Setting up in IntelliJ
+DaveTheBrave is a **desktop chatbot** for managing your tasks amidst your busy schedule, 
+functioning as your very own personal assistant keeping track of all of your tasks anytime and anywhere.
 
-Prerequisites: JDK 21.
+## Quick Start
+1. Ensure you have Java `17` or above installed in your Computer.
+2. Download the latest .jar file from the [repository releases](https://github.com/Jen999/ip/releases).
+3. Copy the file to the folder you want to use as the _home folder_ for DaveTheBrave. 
+4. Open a command terminal, `cd` into the folder of your jar file, and use the `java -jar davethebrave.jar` command to run the application.
+5. A GUI similar to the below should appear in a few seconds, and you can start chatting away about your tasks!
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into IntelliJ as follows:
-    1. Click `Open`.
-    1. Select the project directory, and click `OK`.
-    1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 21** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
+<img src="Ui.png" alt="DaveTheBrave" width="500">
 
-The Main class is located in the `src/main/java/davethebrave/DaveTheBrave` file in the original repository [here](https://github.com/Jen999/ip).
+## Features
 
-## Functionalities
-**✔️ Manage your own list**
-1.  Add tasksFind tasks
-2. Delete tasks
-3. List all tasks
-4. Find tasks
+### View your tasks : `list`
+View all your tasks in a list with a single command.
+`list`
 
-**✔️ Variety of task types**
-1. To-Do tasks
-2. Deadline tasks with end date (deadline)
-3. Event tasks with start and end date
+### Adding tasks : `todo / deadline / event`
+There are 3 different types of tasks you can add:
+- "todo": To-do task without any deadlines
+`todo <TASK_NAME>`
+- "deadline": Task with a deadline to be set
+`deadline <TASK_NAME> /by <YYYY-MM-DD>`
+- "event": Event task with a start and end date
+`event <TASK_NAME> /start <DATE/TIME> /end <DATE/TIME>`
 
-**✔️ Marking feature**
-1. Mark tasks as done
-2. Unmark tasks as undone
+### Deleting tasks : `delete`
+Tasks can be deleted by their index numbers.
+`
+// Delete first task (1.) of the list
+delete 1
+`
 
-## Component Details
-#### Task Manager:
-- Handles all methods related to the list of tasks.
-#### Task
-- Handles all methods related to each individual task.
-#### Parser
-- Parses user commands into Task Manager operations to execute and generate output.
-#### Storage
-- Handles the storing and loading of the list of task from local file.
-#### UI
-- Handles the formatting of basic display messages to be called by Task Manager and Main classes.
+### Marking tasks as done : `mark`
+All types of tasks can be marked by their index numbers when done.
+`
+// Mark fifth task (5.) as done
+mark 5
+`
 
-## Starting out with DaveTheBrave
-After you've had your introductions ("hi", "hey", "hello", "yo"), you can start adding tasks with:
-```
-// Add a To-Do task
-todo Buy groceries
+### Unmarking tasks as not done : `unmark`
+All types of tasks can be unmark by their index numbers.
+`
+// Unmark third task (3.) as undone
+unmark 3
+`
 
-// Add a Deadline task
-deadline Complete CS2103DE iP Week 5 Tasks /by 2025-02-14
+### Find tasks by keyword : `find`
+Search for any tasks with a keyword.
+`
+// Find task with the 'exam' keyword
+find exam
+`
 
-// View your personal list
-list
+### Display deadline tasks chronologically
+View all your urgent deadline tasks in chronological order.
+`show deadline`
 
-// Mark a task by its task number once you've completed it
-mark 1
-
-// Find your task
-find CS2103DE
-
-// Call it a day
-bye
-```
