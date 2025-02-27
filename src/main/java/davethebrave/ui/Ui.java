@@ -9,10 +9,6 @@ import davethebrave.task.Task;
 import java.util.List;
 
 public class Ui {
-    public String showWelcome() {
-        return "Boooo! I'm davethebrave.DaveTheBrave";
-    }
-
     public String respondHello() {
         return "Hey, what's up?";
     }

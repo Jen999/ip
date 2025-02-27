@@ -12,6 +12,9 @@ import java.io.IOException;
  * Main function for handling application
  */
 public class Main extends Application {
+    /*
+    Store task list data from past uses
+     */
     private DaveTheBrave dave = new DaveTheBrave("data/davethebrave.txt");
 
     @Override
