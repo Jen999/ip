@@ -8,7 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Application main function
+ */
 public class Main extends Application {
+    /*
+    Store task list data from past uses
+     */
     private DaveTheBrave dave = new DaveTheBrave("data/davethebrave.txt");
 
     @Override

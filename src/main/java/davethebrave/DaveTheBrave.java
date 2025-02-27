@@ -11,7 +11,6 @@ import davethebrave.storage.Storage;
 import davethebrave.parser.Parser;
 
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.List;
 
 public class DaveTheBrave {
