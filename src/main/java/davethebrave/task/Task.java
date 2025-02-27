@@ -1,13 +1,12 @@
-/*
-Handles methods related to each individual task
- */
-
 package davethebrave.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles methods related to each individual task
+ */
 public class Task {
     private String type; // "T" = To-Do, "D" = Deadline, "E" = Event
     private String description;
@@ -29,9 +28,8 @@ public class Task {
         this.details = details;
 
         /*
-        Task types
+        Handling specific task types (i.e., deadline tasks)
          */
-
         if (type.equals(deadlineType) && details != null) {
             try {
                 this.deadline = LocalDate.parse(details.trim(), INPUT_FORMATTER);
@@ -39,6 +37,14 @@ public class Task {
                 System.out.println("Invalid date format! Please use yyyy-MM-dd (e.g., 2019-10-15).");
             }
         }
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public LocalDate getDate() {
+        return deadline != null ? deadline : LocalDate.MAX;
     }
 
     public String getTaskDescription() {
@@ -66,14 +72,14 @@ public class Task {
     }
 
     /*
-    Writing to file
+    Formatting task to write to data file
      */
     public String toFileFormat() {
         return type + " | " + (status ? "[X]" : "[ ]") + " | " + description + (details != null ? " | " + details : "");
     }
 
     /*
-    Loading from file
+    Loading tasks from data file
      */
     public static Task fromFileFormat(String line) {
         String[] info = line.split("\\s*\\|\\s*");

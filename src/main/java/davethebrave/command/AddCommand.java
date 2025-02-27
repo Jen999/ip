@@ -2,6 +2,9 @@ package davethebrave.command;
 
 import davethebrave.task.TaskManager;
 
+/**
+ * Base command for adding tasks "Todo", "Deadline", and "Event"
+ */
 public class AddCommand implements Command {
     private TaskManager taskManager;
     private String type;

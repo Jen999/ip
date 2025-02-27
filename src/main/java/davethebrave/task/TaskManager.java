@@ -1,7 +1,3 @@
-/*
-Handles methods related to the list of tasks
- */
-
 package davethebrave.task;
 
 import davethebrave.storage.Storage;
@@ -11,7 +7,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+/**
+ * Handles methods related to the list of tasks
+ */
 public class TaskManager {
     private List<Task> tasks;
     private Storage storage;
@@ -120,9 +120,36 @@ public class TaskManager {
         return output;
     }
 
+    /*
+    Show all deadline tasks in chronological order
+     */
+    public String showDeadlines() {
+        String output = "";
+        List<Task> deadlineTasks = tasks.stream()
+                .filter(task -> task.getType().equals(deadlineType))
+                .sorted(Comparator.comparing(Task::getDate))
+                .toList();
+
+        if (deadlineTasks.isEmpty()) {
+            output += "No deadline tasks found.";
+        }
+
+        output += "Here are your deadline tasks in chronological order:\n";
+
+        for (int i = 0; i < deadlineTasks.size(); i++) {
+            Task task = deadlineTasks.get(i);
+            output += "      " + (i + 1) + "." + task.toString() + "\n";
+        }
+        return output;
+    }
+
     private boolean isValidTaskNumber(String taskNumber) {
         try {
             int num = Integer.parseInt(taskNumber);
+            /*
+            Ensure task number is valid
+             */
+            assert num >= 1 && num <= tasks.size() : "Task number is out of bounds.";
             return num >= 1 && num <= tasks.size();
         } catch (NumberFormatException e) {
             return false;

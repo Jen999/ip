@@ -1,14 +1,25 @@
-/*
-Parses user commands into TaskManager operations to execute and generate output
- */
-
 package davethebrave.parser;
 
-import davethebrave.command.*;
+import davethebrave.command.Command;
+import davethebrave.command.AddCommand;
+import davethebrave.command.ChangeMarkCommand;
+import davethebrave.command.DeleteCommand;
+import davethebrave.command.FindCommand;
+import davethebrave.command.InvalidCommand;
+import davethebrave.command.ListCommand;
+import davethebrave.command.ShowDeadlinesCommand;
+
 import davethebrave.task.TaskManager;
 
+/**
+ * Parses user commands into TaskManager operations to execute and generate output
+ */
 public class Parser {
     public static Command parseCommand(String command, TaskManager taskManager) {
+        /*
+        Ensures that command is not null or empty
+         */
+        assert command != null && !command.trim().isEmpty() : "Command cannot be null or empty";
         /*
         Display list when requested
          */
@@ -70,24 +81,32 @@ public class Parser {
             return new ChangeMarkCommand(taskManager, taskNumber, false);
         }
         /*
+        Show deadline tasks in chronological order
+         */
+        else if (command.toLowerCase().startsWith("show deadline")) {
+            return new ShowDeadlinesCommand(taskManager);
+        }
+        /*
         Handle Invalid Commands
          */
         else {
             return new InvalidCommand(
             "--Invalid Command--\n" +
             "Add to list\n" +
-            "      'todo':         todo <task>\n" +
-            "      'deadline':     deadline <task> /by <deadline date/time\n" +
-            "      'event':        event <task> /start <start date/time> /end <end date/time>\n" +
+            "      'todo':  todo <task>\n" +
+            "      'deadline':  deadline <task> /by <deadline date/time\n" +
+            "      'event':  event <task> /start <start date/time> /end <end date/time>\n" +
             "View list\n" +
-            "      'list':         list\n" +
+            "      'list':  list\n" +
+            "View deadline tasks in chronological order\n" +
+            "      'show deadlines':  show deadlines\n" +
             "Mark/Unmark tasks in list\n" +
-            "      'mark':         mark <task>\n" +
-            "      'unmark':       unmark <task>\n" +
+            "      'mark':  mark <task>\n" +
+            "      'unmark':  unmark <task>\n" +
             "Delete task from list\n" +
-            "      'delete':       delete <task number>\n" +
+            "      'delete':  delete <task number>\n" +
             "Find task from list\n" +
-            "      'find':       find <keyword>\n");
+            "      'find':  find <keyword>\n");
         }
     }
 }

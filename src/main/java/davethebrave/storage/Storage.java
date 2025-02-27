@@ -1,7 +1,3 @@
-/*
-Handles the storing and loading of the list of task from local file
- */
-
 package davethebrave.storage;
 
 import davethebrave.task.Task;
@@ -14,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles the storing and loading of the list of task from local file
+ */
 public class Storage {
     private String filePath;
 
@@ -38,6 +37,10 @@ public class Storage {
         try (Scanner scanner = new Scanner(new File(filePath))){
             while (scanner.hasNextLine()) {
                 Task task = Task.fromFileFormat(scanner.nextLine());
+                /*
+                Ensure no null tasks are loaded
+                 */
+                assert task != null : "Loaded task is null";
                 if (task != null) {
                     tasks.add(task);
                 }

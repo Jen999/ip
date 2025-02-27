@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Application main function
+ * Main function for handling application
  */
 public class Main extends Application {
     /*
@@ -23,11 +23,12 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("DaveTheBrave");
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
 
-            fxmlLoader.<MainWindow>getController().setDave(dave);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setDave(dave);  // inject the Dave instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
